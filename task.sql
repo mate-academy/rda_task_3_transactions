@@ -14,9 +14,8 @@ VALUES (1, 1, 1);
 
 -- Update WarehouseAmount of the product
 UPDATE Products
-SET WarehouseAmount = WarehouseAmount - 1 WHERE Product.ID = (
-    SELECT ProductID FROM OrderItems WHERE OrderItems.OrderID = 1
-    );
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE Product.ID = 1;
 
 -- And some data should be created inside the transaction 
 
