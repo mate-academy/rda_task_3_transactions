@@ -1,7 +1,7 @@
 -- Use our database
 USE ShopDB; 
 
-INSERT INTO Orders (CustomerID, Date);
+INSERT INTO Orders (CustomerID, Date)
 VALUE (1, '2023-01-01');
 -- Start the transaction
 START TRANSACTION; 
@@ -9,7 +9,7 @@ START TRANSACTION;
 SET @order_id = LAST_INSERT_ID();
 
 -- Add a product to the order
-INSERT INTO OrderItems (OrderID, ProductID, Count);
+INSERT INTO OrderItems (OrderID, ProductID, Count)
 VALUES (1, 1, 1);
 
 -- Update WarehouseAmount of the product
