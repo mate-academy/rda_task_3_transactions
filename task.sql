@@ -1,11 +1,15 @@
--- Use our database
-USE ShopDB; 
+USE ShopDB;
 
--- Some data should be created outside the transaction (here)
+INSERT INTO Orders (ID, CustomerID, Date)
+	VALUES ('1', '1', '2024-01-10');
 
--- Start the transaction 
+
 START TRANSACTION; 
 
--- And some data should be created inside the transaction 
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+	VALUES ('1', '1', '1');
 
-COMMIT; 
+UPDATE Products SET WarehouseAmount = Products.WarehouseAmount - 1 WHERE Products.ID = '1';
+UPDATE OrderItems SET Count = OrderItems.Count + 1 WHERE OrderID = '1' AND ProductID = '1';
+
+COMMIT;
