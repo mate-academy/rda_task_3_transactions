@@ -13,4 +13,4 @@ WHERE ID = '1' and ProductID = 1 and Count = 1) ,
 -- Check if Products is updated
 SELECT IFNULL( (SELECT ID FROM Products
 WHERE ID = '1' and WarehouseAmount = 41) , 
- (SELECT 'Error: Product amount is incorrect, expected: 41') ); 
+ (SELECT 'Error: Product amount is incorrect, expected: 41') );

@@ -13,4 +13,4 @@ INSERT INTO OrderItems (OrderID, ProductID, Count)
 UPDATE Products SET WarehouseAmount = WarehouseAmount - 1
     WHERE ID = '1';
 
-COMMIT; 
+COMMIT;
