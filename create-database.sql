@@ -36,9 +36,3 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL,
     PRIMARY KEY (ID)
 );
-
-INSERT INTO Products (Name, Description, Price, WarehouseAmount)
-	VALUES ('AwersomeProduct', 'Product Desctiption', 5, 42);
-
-INSERT INTO Customers (FirstName, LastName, Email, Address)
-	VALUES ('John', 'Dou', 'j@dou.ua', 'far, far away');
