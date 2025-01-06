@@ -2,10 +2,13 @@
 USE ShopDB; 
 
 -- Some data should be created outside the transaction (here)
+INSERT INTO Products (Name, Description, Price, WarehouseAmount)
+	VALUES ('AwesomeProduct', 'Product Description', 5, 1);
+INSERT INTO Customers (FirstName, LastName, Email, Address)
+	VALUES ('John', 'Doe', 'j@dou.ua', 'far, far away');
 
 -- Start the transaction 
 START TRANSACTION; 
-
--- And some data should be created inside the transaction 
-
+INSERT INTO Orders(CustomerID, Date)
+    VALUES (1, '2023-01-01');
 COMMIT; 
