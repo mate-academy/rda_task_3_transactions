@@ -6,6 +6,60 @@ USE ShopDB;
 -- Start the transaction 
 START TRANSACTION; 
 
--- And some data should be created inside the transaction 
+INSERT INTO
+    Customers (
+        ID,
+        FirstName,
+        LastName,
+        Email,
+        Address
+    )
+VALUES (
+        1,
+        'John',
+        'Doe',
+        'john.doe@example.com',
+        '123 Main St'
+    );
 
-COMMIT; 
+INSERT INTO Orders (CustomerID, Date) VALUES (1, '2023-01-01');
+
+-- Отримуємо ID створеного замовлення
+SET @OrderID = LAST_INSERT_ID();
+
+SHOW COLUMNS FROM OrderItems;
+
+ALTER TABLE OrderItems ADD COLUMN Count INT NOT NULL;
+
+SELECT * FROM Products WHERE ID = 1;
+
+INSERT INTO
+    Products (
+        ID,
+        Name,
+        Description,
+        Price,
+        WarehouseAmount
+    )
+VALUES (
+        1,
+        'AwersomeProduct',
+        'An amazing product',
+        100.00,
+        50
+    );
+
+-- Додаємо товар AwersomeProduct (ID = 1) у замовлення
+INSERT INTO
+    OrderItems (OrderID, ProductID, Count)
+VALUES (@OrderID, 1, 1);
+
+-- Оновлюємо кількість товару на складі
+UPDATE Products
+SET
+    WarehouseAmount = WarehouseAmount - 1
+WHERE
+    ID = 1;
+
+-- Завершуємо транзакцію
+COMMIT;
