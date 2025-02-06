@@ -48,11 +48,31 @@ VALUES (
         100.00,
         50
     );
+SELECT * FROM Products WHERE Name = 'AwersomeProduct';
 
+SELECT * FROM Customers WHERE ID = 1;
+
+SELECT * FROM Orders WHERE CustomerID = 1;
+
+SELECT * FROM OrderItems WHERE ProductID = 1;
 -- Додаємо товар AwersomeProduct (ID = 1) у замовлення
 INSERT INTO
     OrderItems (OrderID, ProductID, Count)
 VALUES (@OrderID, 1, 1);
+
+UPDATE Products
+SET
+    Name = 'AwesomeProduct'
+WHERE
+    Name = 'AwersomeProduct';
+
+ALTER TABLE Customers MODIFY ID INT AUTO_INCREMENT;
+
+SELECT * FROM Products;
+
+SELECT * FROM Orders;
+
+SELECT * FROM OrderItems;
 
 -- Оновлюємо кількість товару на складі
 UPDATE Products
