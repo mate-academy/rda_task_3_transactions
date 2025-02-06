@@ -74,6 +74,10 @@ SELECT * FROM Orders;
 
 SELECT * FROM OrderItems;
 
+
+DELETE FROM Orders WHERE CustomerID = 1;
+
+DELETE FROM Customers WHERE ID = 1;
 -- Оновлюємо кількість товару на складі
 UPDATE Products
 SET
