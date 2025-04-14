@@ -7,7 +7,7 @@ WHERE ID = '1' and CustomerID = 1) ,
 
  -- Check if OrderItem was created 
 SELECT IFNULL( (SELECT ID FROM OrderItems
-WHERE ID = '1' and ProductID = 1 and Count = 1) , 
+WHERE ID = '1' and ProductID = 1 and COUNT = 1) ,
  (SELECT 'Error: Order item was not created or incorect amount') ); 
 
 -- Check if Products is updated

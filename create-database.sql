@@ -32,7 +32,7 @@ CREATE TABLE OrderItems (
     OrderID INT, 
     FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE SET NULL,
 	ProductID INT, 
-    Count INT,
+    COUNT INT,
     FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL,
     PRIMARY KEY (ID)
 );
