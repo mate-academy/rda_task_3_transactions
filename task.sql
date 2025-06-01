@@ -1,11 +1,19 @@
--- Use our database
-USE ShopDB; 
+START TRANSACTION;
 
--- Some data should be created outside the transaction (here)
+-- 1. Створити нове замовлення
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2023-01-01');
 
--- Start the transaction 
-START TRANSACTION; 
+-- 2. Отримати ID щойно створеного замовлення
+SET @order_id = LAST_INSERT_ID();
 
--- And some data should be created inside the transaction 
+-- 3. Додати товар до замовлення (ProductID: 1, Count: 1)
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (@order_id, 1, 1);
 
-COMMIT; 
+-- 4. Зменшити кількість товару на складі
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+
+COMMIT;
