@@ -6,7 +6,7 @@ USE ShopDB;
 -- Start the transaction 
 START TRANSACTION; 
 
-INSERT INTO Orders(CustomersID, Date)
+INSERT INTO Orders(CustomerID, Date)
 VALUES ('1', '2023-01-01');
 
 SET @order_id = 1;
