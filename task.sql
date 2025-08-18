@@ -1,14 +1,21 @@
 -- Use our database
 USE ShopDB; 
-INSERT INTO Orders (CustomerID, Date) VALUES (1, '2023-01-01');
--- Some data should be created outside the transaction (here)
+START TRANSACTION;
 
--- Start the transaction 
-START TRANSACTION; 
+-- Создаем новый заказ (Order) для customer_id=1 с датой '2023-01-01'
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2023-01-01');
 
--- And some data should be created inside the transaction 
-INSERT INTO OrderItems (OrderID, ProductID, Count) VALUES (1, 1, 1);
+-- Получаем ID только что созданного заказа (MySQL переменная LAST_INSERT_ID())
+SET @new_order_id = LAST_INSERT_ID();
 
-UPDATE Products SET WarehouseAmount = WarehouseAmount - 1 WHERE ID = 1;
+-- Добавляем в OrderItems позицию: product_id=1, count=1, заказ @new_order_id
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (@new_order_id, 1, 1);
 
-COMMIT; 
+-- Обновляем количество товара на складе (уменьшаем WarehouseAmount на 1)
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+
+COMMIT;
