@@ -1,21 +1,21 @@
+DROP DATABASE IF EXISTS ShopDB;
+CREATE DATABASE ShopDB;
 USE ShopDB;
+
+SOURCE create-database.sql;
+
+START TRANSACTION;
 
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2023-01-01');
 
 SET @NewOrderID = LAST_INSERT_ID();
 
-START TRANSACTION;
-
 INSERT INTO OrderItems (OrderID, ProductID, Count)
 VALUES (@NewOrderID, 1, 1);
 
 UPDATE Products
 SET WarehouseAmount = WarehouseAmount - 1
-WHERE ID = 1 AND WarehouseAmount >= 1;
+WHERE ID = 1;
 
-IF ROW_COUNT() = 0 THEN
-    ROLLBACK;
-ELSE
-    COMMIT;
-END IF;
+COMMIT;
