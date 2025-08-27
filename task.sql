@@ -1,11 +1,21 @@
--- Use our database
-USE ShopDB; 
+USE ShopDB;
 
--- Some data should be created outside the transaction (here)
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2025-08-27');
 
--- Start the transaction 
-START TRANSACTION; 
+START TRANSACTION;
 
--- And some data should be created inside the transaction 
+SELECT id
+INTO @order_id
+FROM Orders
+ORDER BY id DESC
+LIMIT 1;
 
-COMMIT; 
+INSERT INTO OrderItems(OrderID, ProductID, Count)
+VALUE (@order_id, 1, 4);
+
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 4
+WHERE ID = 1;
+
+COMMIT;
