@@ -5,11 +5,7 @@ VALUES (1, '2025-08-27');
 
 START TRANSACTION;
 
-SELECT id
-INTO @order_id
-FROM Orders
-ORDER BY id DESC
-LIMIT 1;
+SET @order_id = LAST_INSERT_ID();
 
 INSERT INTO OrderItems(OrderID, ProductID, Count)
 VALUE (@order_id, 1, 1);
