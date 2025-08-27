@@ -12,10 +12,10 @@ ORDER BY id DESC
 LIMIT 1;
 
 INSERT INTO OrderItems(OrderID, ProductID, Count)
-VALUE (@order_id, 1, 4);
+VALUE (@order_id, 1, 1);
 
 UPDATE Products
-SET WarehouseAmount = WarehouseAmount - 4
+SET WarehouseAmount = WarehouseAmount - 1
 WHERE ID = 1;
 
 COMMIT;
