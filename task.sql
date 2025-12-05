@@ -5,7 +5,7 @@ USE ShopDB;
 
 -- Start the transaction 
 START TRANSACTION; 
-
+UPDATE Products SET  WarehouseAmount =  WarehouseAmount - OrderItems.Count WHERE ID = OrderItems.ProductID
 -- And some data should be created inside the transaction 
 
 COMMIT; 
