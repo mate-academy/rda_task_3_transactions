@@ -1,11 +1,27 @@
 -- Use our database
+SOURCE 'create-database.sql'
 USE ShopDB; 
 
 -- Some data should be created outside the transaction (here)
 
--- Start the transaction 
-START TRANSACTION; 
+-- start transaction
+START TRANSACTION;
 
--- And some data should be created inside the transaction 
+-- 1. create order
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2023-01-01');
 
-COMMIT; 
+-- get created order id
+SET @order_id = LAST_INSERT_ID();
+
+-- 2. create order item (AwersomeProduct id = 1, count = 1)
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (@order_id, 1, 1);
+
+-- 3. decrease warehouse amount
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+
+-- commit transaction
+COMMIT;
