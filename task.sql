@@ -1,9 +1,9 @@
 USE ShopDB; 
 
+START TRANSACTION;
+
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, CURDATE());
-
-START TRANSACTION;
 
 SELECT WarehouseAmount
 FROM Products
