@@ -1,9 +1,9 @@
 USE ShopDB; 
 
-START TRANSACTION;
-
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, CURDATE());
+
+START TRANSACTION;
 
 INSERT INTO OrderItems (OrderID, ProductID, Count) VALUES(LAST_INSERT_ID(), 1, 1);
 
