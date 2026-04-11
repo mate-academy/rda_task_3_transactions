@@ -1,18 +1,18 @@
--- Use our database
 USE ShopDB;
 
--- Create empty order outside transaction
+-- Create order OUTSIDE transaction (IMPORTANT per tests)
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2023-01-01');
 
--- Start the transaction
+SET @order_id = LAST_INSERT_ID();
+
 START TRANSACTION;
 
--- Add product to the order (OrderID = 1, ProductID = 1, Count = 1)
-INSERT INTO OrderItems (OrderID, ProductID, Count)
-VALUES (1, 1, 1);
+-- Add product to order
+INSERT INTO OrderItems (OrderID, ProductID, `Count`)
+VALUES (@order_id, 1, 1);
 
--- Decrease warehouse amount
+-- Update stock
 UPDATE Products
 SET WarehouseAmount = WarehouseAmount - 1
 WHERE ID = 1;
