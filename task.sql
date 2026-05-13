@@ -1,11 +1,11 @@
 -- Use our database
 USE ShopDB;
 
--- Start the transaction 
-START TRANSACTION; 
-
 INSERT INTO Orders(CustomerID, Date)
     VALUES(1, '2026-05-13');
+
+-- Start the transaction 
+START TRANSACTION; 
 
 SET @orderId = LAST_INSERT_ID();
 
