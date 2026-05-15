@@ -1,12 +1,8 @@
 USE ShopDB;
-
-START TRANSACTION; 
-INSERT INTO Products (Name, Description, Price, WarehouseAmount)
-VALUES ('AwersomeProduct', 'Product Desctiption', 5, 42);
-INSERT INTO Customers (FirstName, LastName, Email, Address)
-VALUES ('John', 'Dou', 'j@dou.ua', 'far, far away');
+START TRANSACTION;
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2026-1-1');
+
 SET @order_id = LAST_INSERT_ID();
 
 INSERT INTO OrderItems (OrderID, ProductID, Count)
