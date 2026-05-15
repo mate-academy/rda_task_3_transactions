@@ -1,7 +1,7 @@
 USE ShopDB;
-START TRANSACTION;
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2026-1-1');
+START TRANSACTION;
 
 SET @order_id = LAST_INSERT_ID();
 
