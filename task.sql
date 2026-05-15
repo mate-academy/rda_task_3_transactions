@@ -1,11 +1,20 @@
--- Use our database
-USE ShopDB; 
+USE ShopDB;
 
--- Some data should be created outside the transaction (here)
+INSERT INTO Products (Name, Description, Price, WarehouseAmount)
+	VALUES ('AwersomeProduct', 'Product Desctiption', 5, 42);
 
--- Start the transaction 
+INSERT INTO Customers (FirstName, LastName, Email, Address)
+	VALUES ('John', 'Dou', 'j@dou.ua', 'far, far away');
 START TRANSACTION; 
 
--- And some data should be created inside the transaction 
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2026-1-1');
+SET @order_id = LAST_INSERT_ID();
 
-COMMIT; 
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (@order_id, 1, 1);
+
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+COMMIT;
