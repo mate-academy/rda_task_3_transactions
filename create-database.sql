@@ -30,11 +30,11 @@ CREATE TABLE Orders (
 CREATE TABLE OrderItems (
     ID INT AUTO_INCREMENT,
     OrderID INT, 
-    FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE SET NULL,
-	ProductID INT, 
+    ProductID INT, 
     Count INT,
-    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE SET NULL,
+    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL
 );
 
 INSERT INTO Products (Name, Description, Price, WarehouseAmount)
