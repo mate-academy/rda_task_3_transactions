@@ -1,3 +1,4 @@
+USE ShopDB;
 START TRANSACTION;
 
 INSERT INTO Orders (CustomerID, Date)
