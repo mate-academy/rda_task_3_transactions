@@ -8,6 +8,8 @@ insert into Orders (CustomerID, Date) values (1, '2024-06-01');
 START TRANSACTION; 
 
 -- And some data should be created inside the transaction 
+
+insert into OrderItems (OrderID, ProductID, Quantity) values (1, 1, 1);
 update Products set WarehouseAmount = WarehouseAmount - 1 where ID = 1;
 
 COMMIT; 
