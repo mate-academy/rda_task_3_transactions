@@ -5,7 +5,11 @@ USE ShopDB;
 
 -- Start the transaction 
 START TRANSACTION; 
+INSERT INTO Orders (CustomerID, Date)
+VALUES ('1', '2023-01-01');
 
--- And some data should be created inside the transaction 
+INSERT INTO OrderItems (OrderID, ProductID , Count)
+VALUES (LAST_INSERT_ID(), '1', '1');
 
-COMMIT; 
+UPDATE Products SET WarehouseAmount = WarehouseAmount - 1 WHERE ID = '1';
+COMMIT
