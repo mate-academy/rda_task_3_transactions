@@ -2,21 +2,22 @@
 USE ShopDB;
 
 -- Some data should be created outside the transaction (here)
--- (nothing needs to be prepared outside the transaction for this order)
+
+-- Creating an order is a standalone action: a new order starts out empty,
+-- so it does not need to be atomic with anything else.
+INSERT INTO Orders (CustomerID, Date)
+	VALUES (1, '2023-01-01');
+
+SET @OrderID = LAST_INSERT_ID();
 
 -- Start the transaction
 START TRANSACTION;
 
 -- And some data should be created inside the transaction
 
--- Creating the order, adding its item, and decreasing the corresponding
--- product's WarehouseAmount must all succeed or all fail together, so the
--- whole order-creation flow is wrapped in a single transaction.
-INSERT INTO Orders (CustomerID, Date)
-	VALUES (1, '2023-01-01');
-
-SET @OrderID = LAST_INSERT_ID();
-
+-- Adding an order item and decreasing the corresponding product's
+-- WarehouseAmount must happen together, or not at all, to keep stock
+-- counts consistent with what has actually been ordered.
 INSERT INTO OrderItems (OrderID, ProductID, Count)
 	VALUES (@OrderID, 1, 1);
 
