@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/create-database.sql" value="839a2165-53f0-40b5-bc4a-6e9dc79a9717" />
+    <file url="file://$PROJECT_DIR$/task.sql" value="839a2165-53f0-40b5-bc4a-6e9dc79a9717" />
+    <file url="file://$PROJECT_DIR$/test.sql" value="839a2165-53f0-40b5-bc4a-6e9dc79a9717" />
+  </component>
+</project>
