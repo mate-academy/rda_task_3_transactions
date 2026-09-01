@@ -1,9 +1,7 @@
 USE ShopDB;
 
-INSERT INTO Orders (CustomerID, Date)
-VALUES (1, '2023-01-01');
-
-SET @OrderID = LAST_INSERT_ID();
+SELECT IFNULL(MAX(ID), 0) + 1 INTO @OrderID
+FROM Orders;
 
 START TRANSACTION;
 
@@ -15,3 +13,6 @@ SET WarehouseAmount = WarehouseAmount - 1
 WHERE ID = 1;
 
 COMMIT;
+
+INSERT INTO Orders (ID, CustomerID, Date)
+VALUES (@OrderID, 1, '2023-01-01');
