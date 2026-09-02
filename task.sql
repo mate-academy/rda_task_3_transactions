@@ -1,11 +1,61 @@
--- Use our database
-USE ShopDB; 
+DROP DATABASE IF EXISTS ShopDB;
+CREATE DATABASE ShopDB;
+USE ShopDB;
 
--- Some data should be created outside the transaction (here)
+CREATE TABLE Products (
+    ID INT AUTO_INCREMENT,
+    Name VARCHAR(50),
+    Description VARCHAR(100),
+    Price INT,
+    WarehouseAmount INT,
+    PRIMARY KEY (ID)
+);
 
--- Start the transaction 
-START TRANSACTION; 
+CREATE TABLE Customers (
+    ID INT AUTO_INCREMENT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(50),
+    Address VARCHAR(50),
+    PRIMARY KEY (ID)
+);
 
--- And some data should be created inside the transaction 
+CREATE TABLE Orders (
+    ID INT AUTO_INCREMENT,
+    CustomerID INT,
+    Date DATE,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(ID) ON DELETE SET NULL
+);
 
-COMMIT; 
+CREATE TABLE OrderItems (
+    ID INT AUTO_INCREMENT,
+    OrderID INT,
+    ProductID INT,
+    Count INT,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE SET NULL,
+    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL
+);
+
+INSERT INTO Products (Name, Description, Price, WarehouseAmount)
+VALUES ('AwersomeProduct', 'Product Desctiption', 5, 42);
+
+INSERT INTO Customers (FirstName, LastName, Email, Address)
+VALUES ('John', 'Dou', 'j@dou.ua', 'far, far away');
+
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2023-01-01');
+
+SET @new_order_id = LAST_INSERT_ID();
+
+START TRANSACTION;
+
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (@new_order_id, 1, 1);
+
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+
+COMMIT;
