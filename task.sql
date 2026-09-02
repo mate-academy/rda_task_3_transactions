@@ -1,3 +1,4 @@
+USE ShopDB;
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2023-01-01');
 
