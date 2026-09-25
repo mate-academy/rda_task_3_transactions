@@ -1,13 +1,12 @@
 -- Use our database
 USE ShopDB; 
 
+START TRANSACTION;
+
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2023-01-01');
 
 set @OrderID = last_insert_id();
-
--- Start the transaction 
-START TRANSACTION; 
 
 insert into OrderItems (OrderID, ProductID, Count)
 values (@OrderID, 1, 1);
