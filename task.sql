@@ -1,11 +1,20 @@
--- Use our database
-USE ShopDB; 
+USE ShopDB;
 
--- Some data should be created outside the transaction (here)
+-- 1. Створення нового замовлення (виконується ПОЗА транзакцією)
+INSERT INTO Orders (CustomerID, Date)
+VALUES (1, '2023-01-01');
 
--- Start the transaction 
-START TRANSACTION; 
+-- 2. Початок транзакції для пов'язаних операцій, що потребують атомарності
+START TRANSACTION;
 
--- And some data should be created inside the transaction 
+-- Додавання товару з використанням LAST_INSERT_ID() від попереднього запиту Orders
+INSERT INTO OrderItems (OrderID, ProductID, Count)
+VALUES (LAST_INSERT_ID(), 1, 1);
 
-COMMIT; 
+-- Оновлення кількості товару на складі
+UPDATE Products
+SET WarehouseAmount = WarehouseAmount - 1
+WHERE ID = 1;
+
+-- Фіксація транзакції
+COMMIT;
