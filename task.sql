@@ -1,13 +1,12 @@
--- Use our database
-USE ShopDB; 
+USE ShopDB;
 
 INSERT INTO Customers (FirstName, LastName, Email, Address)
-VALUES ('Art', 'adasd', 'test@dou.ua', 'aaaa');
+    VALUES ('Art', 'adasd', 'test@dou.ua', 'aaaa');
 
--- Start the transaction
-START TRANSACTION;
 INSERT INTO Orders (CustomerID, Date)
     VALUES (1, '2023-01-10');
+
+START TRANSACTION;
 
 INSERT INTO OrderItems(OrderID, ProductID, Count)
     VALUES (LAST_INSERT_ID(), 1, 1);
